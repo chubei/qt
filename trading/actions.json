@@ -1,0 +1,34 @@
+{
+  "actions": {
+    "schema": {
+      "fields": [
+        {
+          "name": "action",
+          "typ": "String",
+          "nullable": true
+        },
+        {
+          "name": "amount_in_dollar",
+          "typ": "Float",
+          "nullable": true
+        },
+        {
+          "name": "ticker",
+          "typ": "String",
+          "nullable": true
+        },
+        {
+          "name": "time",
+          "typ": "Timestamp",
+          "nullable": false
+        },
+        {
+          "name": "price_in_dollar",
+          "typ": "Float",
+          "nullable": true
+        }
+      ],
+      "cdc_type": "Nothing"
+    }
+  }
+}

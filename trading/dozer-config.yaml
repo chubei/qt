@@ -1,0 +1,15 @@
+app_name: trading
+version: 1
+
+connections:
+- name: actions
+  config: !Grpc
+    host: 0.0.0.0
+    port: 12345
+    adapter: default
+    schemas: !Path actions.json
+
+endpoints:
+- name: actions
+  path: /actions
+  table_name: actions

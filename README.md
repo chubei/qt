@@ -27,7 +27,7 @@ Table price {
   ticker string
   time timestamp
   price_in_dollar float
-  volume int
+  volume float
 }
 Table actions {
   action string // Deposit, Buy, Sell, nullable

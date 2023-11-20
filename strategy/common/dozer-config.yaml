@@ -15,3 +15,8 @@ endpoints:
   - name: price
     table_name: price
     path: /price
+
+lambdas:
+  - !JavaScript
+    endpoint: price
+    module: ./obv.ts

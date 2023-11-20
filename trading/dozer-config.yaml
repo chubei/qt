@@ -1,5 +1,17 @@
 app_name: trading
 version: 1
+api:
+  app_grpc:
+    port: 50153
+  rest:
+    port:
+      9080
+  grpc:
+    port:
+      50151
+  sql:
+    port:
+      9999
 
 connections:
 - name: actions

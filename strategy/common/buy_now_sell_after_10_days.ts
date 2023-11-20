@@ -1,3 +1,4 @@
+
 import {ActionClient} from "./action_client.ts";
 import {} from "./init_lambda.ts";
 
@@ -11,7 +12,7 @@ let client: ActionClient = await ActionClient.new(12345);
 
 const sellDates = {};
 
-const run = (obj: any) => {
+const run = async (obj: any) => {
  let newDate = new Date(obj.new.Date);
 
  newDate.setDate(newDate.getDate() + 10);
@@ -21,11 +22,10 @@ const run = (obj: any) => {
  console.log('sell date', newDate.toISOString().split('T')[0]);
 
  // Indicate buy
- console.log('buying');
+ await client.buy(new Date(obj.new.Date), "AAPL", obj.new.Close);
 
  if (sellDates[obj.new.Date] === true) {
-   // Indicate sell
-  console.log('selling');
+  await client.sell(new Date(obj.new.Date), "AAPL", obj.new.Close);
  }
 }
 

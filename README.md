@@ -39,6 +39,6 @@ Table actions {
 Table net_worth {
   time timestamp
   cash_in_dollar float
-  market_value_in_dollar float
+  asset_value_in_dollar float
 }
 ```

@@ -1,0 +1,17 @@
+version: 1
+app_name: dozer-strategy
+connections:
+  - config: !JavaScript
+     bootstrap_path: ./ingest_price.js
+    name: price_connection
+
+
+sources:
+  - name: price
+    table_name: json_records
+    connection: price_connection
+  
+endpoints:
+  - name: price
+    table_name: price
+    path: /price

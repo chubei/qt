@@ -24,6 +24,10 @@ endpoints:
 
 
 lambdas:
+#  - !JavaScript
+#    endpoint: prices
+#    module: ./common/buy_now_sell_after_10_days.ts
+
   - !JavaScript
     endpoint: prices
-    module: ./common/buy_now_sell_after_10_days.ts
+    module: ./common/obv.ts

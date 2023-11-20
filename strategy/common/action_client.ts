@@ -88,6 +88,25 @@ export class ActionClient {
     ]);
   }
 
+  /**
+   * Don't do anything for the given quote.
+   */
+  async skip(time: Date, ticker: string, priceInDollar: number) {
+    await this.insert([
+      {},
+      {},
+      {
+        stringValue: ticker,
+      },
+      {
+        timestampValue: dateToTimestamp(time),
+      },
+      {
+        floatValue: priceInDollar,
+      },
+    ]);
+  }
+
   async close() {
     await this.client.close();
   }

@@ -1,4 +1,6 @@
 import {ActionClient} from "./action_client.ts";
+import {} from "./init_lambda.ts";
+
 //
 // let currentBalance = 0;
 //

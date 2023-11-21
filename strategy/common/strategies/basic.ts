@@ -1,7 +1,7 @@
 import {StrategyExecution, Value} from "./interface.ts";
 import {ActionClient} from "../action_client.ts";
 
-let client: ActionClient = await ActionClient.new(12345);
+let client: ActionClient = await ActionClient.newFile("basic.jsonl");
 
 /*
  Enter position when one of conditions is met:

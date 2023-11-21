@@ -19,6 +19,16 @@ dozer run
 
 You can check the net worth change in `http://localhost:9080/net_worth`.
 
+### Temporary workaround
+
+Because Dozer crashes if lambda starts async tasks, currently we're using `ActionClient.newFile` to output the actions to a JSONL file, instead of directly ingesting to trading application.
+
+After the strategy finishes, run the following command to ingest:
+
+```bash
+deno run --allow-all trading/mock/ingest_from_file.ts ${path_to_jsonl}
+```
+
 ## Trading Dozer
 
 Go to `./trading`.

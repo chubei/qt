@@ -7,24 +7,19 @@ import { IngestService, Timestamp, Value } from "./ingest.d.ts";
 const schemaName = "actions";
 
 export class ActionClient {
-  private readonly client: GrpcClient & IngestService;
+  private readonly writer: FileWriter | GrpcWriter;
   private seqNo: number = 0;
 
-  static async new(port: number): Promise<ActionClient> {
-    const protoPath = new URL("./ingest.proto", import.meta.url);
-    const protoFile = await Deno.readTextFile(protoPath);
-
-    const client = getClient<IngestService>({
-      port,
-      root: protoFile,
-      serviceName: "IngestService",
-    });
-
-    return new ActionClient(client);
+  static async newGrpc(port: number): Promise<ActionClient> {
+    return new ActionClient(await GrpcWriter.new(port));
   }
 
-  private constructor(client: GrpcClient & IngestService) {
-    this.client = client;
+  static async newFile(path: string): Promise<ActionClient> {
+    return new ActionClient(await FileWriter.new(path))
+  }
+
+  private constructor(writer: FileWriter | GrpcWriter) {
+    this.writer = writer;
   }
 
   /**
@@ -108,13 +103,13 @@ export class ActionClient {
   }
 
   async close() {
-    await this.client.close();
+    await this.writer.close();
   }
 
   private async insert(values: Value[]) {
     const seqNo = this.seqNo;
     this.seqNo += 1;
-    await this.client.ingest({
+    await this.writer.write({
       schemaName,
       typ: "INSERT",
       new: values,
@@ -131,4 +126,53 @@ function dateToTimestamp(date: Date): Timestamp {
     seconds,
     nanos,
   };
+}
+
+export class GrpcWriter {
+  private readonly client: GrpcClient & IngestService;
+
+  static async new(port: number): Promise<GrpcWriter> {
+    const protoPath = new URL("./ingest.proto", import.meta.url);
+    const protoFile = await Deno.readTextFile(protoPath);
+
+    const client = getClient<IngestService>({
+      port,
+      root: protoFile,
+      serviceName: "IngestService",
+    });
+
+    return new GrpcWriter(client);
+  }
+
+  constructor(client: GrpcClient & IngestService) {
+    this.client = client;
+  }
+
+  async write(data: object) {
+    await this.client.ingest(data);
+  }
+
+  close() {
+    this.client.close()
+  }
+}
+
+class FileWriter {
+  static new(path: string): Promise<FileWriter> {
+    const file = Deno.openSync(path, {
+      create: true,
+      write: true,
+    });
+    return new FileWriter(file);
+  }
+
+  constructor(readonly file: Deno.FsFile) {}
+
+  async write(data: object) {
+    this.file.writeSync(new TextEncoder().encode(JSON.stringify(data) + "\n"));
+  }
+
+  close() {
+    this.file.close()
+  }
 }

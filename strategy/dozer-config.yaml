@@ -39,4 +39,4 @@ sql: |
 udfs:
   - name: obv
     config: !JavaScript
-      module: ./common/indicators/obv.ts
+      module: ./indicators/obv.ts

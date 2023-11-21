@@ -25,7 +25,7 @@ async function fetchDataAndIngest() {
         const tickers = ['AAPL', 'MSFT', 'AMZN', 'GOOG', 'BABA']
 
         for (const ticker of tickers) {
-            const url = 'http://api.marketstack.com/v1/eod?access_key=3b0b27edd5fcea60cf6b6245af317e87&symbols=' + ticker
+            const url = 'http://api.marketstack.com/v1/eod?access_key=3b0b27edd5fcea60cf6b6245af317e87&sort=ASC&limit=1000&symbols=' + ticker
             console.log(url)
             const response = await fetch(url);
             const result = await response.json();

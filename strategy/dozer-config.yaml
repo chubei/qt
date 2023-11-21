@@ -28,7 +28,7 @@ endpoints:
 lambdas:
   - !JavaScript
     endpoint: indicators
-    module: ./common/strategies_runner.ts
+    module: ./strategies/obv.ts
 
 sql: |
   SELECT 

@@ -21,7 +21,9 @@ You can check the net worth change in `http://localhost:9080/net_worth`.
 
 ### Temporary workaround
 
-Because Dozer crashes if lambda starts async tasks, currently we're using `ActionClient.newFile` to output the actions to a JSONL file, instead of directly ingesting to trading application.
+Because Dozer crashes if lambda starts async tasks, currently we're using
+`ActionClient.newFile` to output the actions to a JSONL file, instead of
+directly ingesting to trading application.
 
 After the strategy finishes, run the following command to ingest:
 
@@ -29,7 +31,8 @@ After the strategy finishes, run the following command to ingest:
 deno run --allow-all trading/mock/ingest_from_file.ts ${strategy1_output} ${strategy2_output} ...
 ```
 
-`ingest_from_file` adds Deposit action at the beginning automatically, so don't have to run `deposit.ts`.
+`ingest_from_file` adds Deposit action at the beginning automatically, so don't
+have to run `deposit.ts`.
 
 ## Trading Dozer
 

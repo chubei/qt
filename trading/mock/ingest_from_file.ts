@@ -1,4 +1,7 @@
-import { ActionClient, timestampToDate } from "../../strategy/common/action_client.ts";
+import {
+  ActionClient,
+  timestampToDate,
+} from "../../strategy/common/action_client.ts";
 import { readline } from "https://deno.land/x/readline@v1.1.0/mod.ts";
 
 async function ingestFromFile(path: string) {

@@ -70,7 +70,9 @@ interface SkipAction {
   price_in_dollar: number;
 }
 
-export type Action = ActionCommon & (DepositAction | BuyAction | SellAction | SkipAction);
+export type Action =
+  & ActionCommon
+  & (DepositAction | BuyAction | SellAction | SkipAction);
 
 interface NetWorth {
   strategy: string;
@@ -97,19 +99,27 @@ export default function (operation: Operation<Action>): Operation<NetWorth> {
       case "Buy":
         if (account && account.cashInDollar > 0) {
           const numShares = account.cashInDollar / action.price_in_dollar;
-          account.holding = new Holding(action.ticker, numShares, action.price_in_dollar);
+          account.holding = new Holding(
+            action.ticker,
+            numShares,
+            action.price_in_dollar,
+          );
           account.cashInDollar = 0;
         }
         break;
       case "Sell":
-        if (account && account.holding && action.ticker === account.holding.ticker) {
+        if (
+          account && account.holding && action.ticker === account.holding.ticker
+        ) {
           account.holding.priceInDollar = action.price_in_dollar;
           account.cashInDollar = account.holding.assetValueInDollar();
           account.holding = null;
         }
         break;
       case null:
-        if (account && account.holding && action.ticker === account.holding.ticker) {
+        if (
+          account && account.holding && action.ticker === account.holding.ticker
+        ) {
           account.holding.priceInDollar = action.price_in_dollar;
         }
         break;

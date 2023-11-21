@@ -11,6 +11,7 @@ export interface Indicator {
   price: number;
   time: number;
   obv: number;
+  ma12: number;
 }
 
 export interface StrategyExecution {

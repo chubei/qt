@@ -55,7 +55,7 @@ export class Basic implements StrategyExecution {
         if (entryPoint[ticker]?.date) {
             if (testExitCondition(ticker, price, indicator)) {
                 console.log(`Exit point ${ticker} ${entryPoint[ticker].price} -> ${price}`);
-                console.log(`Profit ${Math.round((1 - (price / entryPoint[ticker].price )) * 1000000) / 10000}%`);
+                console.log(`Profit ${Math.round(((price / entryPoint[ticker].price ) - 1) * 1000000) / 10000}%`);
 
                 entryPoint[ticker].price = 0;
                 entryPoint[ticker].date = null;

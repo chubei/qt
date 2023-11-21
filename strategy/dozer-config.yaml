@@ -22,7 +22,7 @@ endpoints:
 lambdas:
   - !JavaScript
     endpoint: indicators
-    module: ./strategies_runner.ts
+    module: ./common/strategies_runner.ts
 
 sql:
     SELECT obv(value) as value INTO indicators FROM price;
@@ -30,4 +30,4 @@ sql:
 udfs:
   - name: obv
     config: !JavaScript
-      module: ./indicators/obv.ts
+      module: ./common/indicators/obv.ts

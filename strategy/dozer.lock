@@ -5,7 +5,36 @@
       {
         "handle": {
           "ns": 1,
+          "id": "from:price--2"
+        },
+        "kind": {
+          "Processor": {
+            "typ": "Table"
+          }
+        }
+      },
+      {
+        "handle": {
+          "ns": 1,
+          "id": "agg--3"
+        },
+        "kind": {
+          "Processor": {
+            "typ": "Projection"
+          }
+        }
+      },
+      {
+        "handle": {
+          "ns": 1,
           "id": "price"
+        },
+        "kind": "Sink"
+      },
+      {
+        "handle": {
+          "ns": 1,
+          "id": "indicators"
         },
         "kind": "Sink"
       },
@@ -28,8 +57,75 @@
     "edge_property": "directed",
     "edges": [
       [
-        1,
         0,
+        1,
+        {
+          "from_port": 65535,
+          "to_port": 65535,
+          "schema": {
+            "fields": [
+              {
+                "name": "value",
+                "typ": "Json",
+                "nullable": false,
+                "source": {
+                  "Table": {
+                    "connection": "price_connection",
+                    "name": "json_records"
+                  }
+                }
+              }
+            ],
+            "primary_index": []
+          }
+        }
+      ],
+      [
+        1,
+        3,
+        {
+          "from_port": 65535,
+          "to_port": 65535,
+          "schema": {
+            "fields": [
+              {
+                "name": "value",
+                "typ": "Json",
+                "nullable": false,
+                "source": "Dynamic"
+              }
+            ],
+            "primary_index": []
+          }
+        }
+      ],
+      [
+        4,
+        0,
+        {
+          "from_port": 1000,
+          "to_port": 65535,
+          "schema": {
+            "fields": [
+              {
+                "name": "value",
+                "typ": "Json",
+                "nullable": false,
+                "source": {
+                  "Table": {
+                    "connection": "price_connection",
+                    "name": "json_records"
+                  }
+                }
+              }
+            ],
+            "primary_index": []
+          }
+        }
+      ],
+      [
+        4,
+        2,
         {
           "from_port": 1000,
           "to_port": 65535,
@@ -54,6 +150,26 @@
     ]
   },
   "endpoints": {
+    "indicators": {
+      "path": "/indicators",
+      "schema": {
+        "fields": [
+          {
+            "name": "value",
+            "typ": "Json",
+            "nullable": false,
+            "source": "Dynamic"
+          }
+        ],
+        "primary_index": []
+      },
+      "secondary_indexes": [],
+      "enable_token": false,
+      "enable_on_event": true,
+      "connections": [
+        "price_connection"
+      ]
+    },
     "price": {
       "path": "/price",
       "schema": {

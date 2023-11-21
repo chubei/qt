@@ -14,7 +14,7 @@ let client: ActionClient = await ActionClient.new(12345);
 */
 
 const PROFIT_MARGIN = 0.01;
-const MAX_PRICE_CHANGES = 3;
+const MAX_PRICE_CHANGES = 10;
 
 let previousDayPrice: {[key: string]: number} = {};
 
@@ -42,8 +42,6 @@ let testExitCondition = (ticker: string, price: number, indicator: number) => {
     }
 };
 
-let balance: {[key: string]: number} = {};
-
 export class Basic implements StrategyExecution {
     async run(v: { new: { value: Value } }): void {
         let obj = v.new.value;
@@ -52,18 +50,12 @@ export class Basic implements StrategyExecution {
         let ticker = obj.ticker;
         let indicator = obj.indicator;
 
-        if (!previousDayPrice[ticker]) {
-            balance[ticker] = 1000;
-        }
-
         previousDayPrice[ticker] = price;
 
         if (entryPoint[ticker]?.date) {
             if (testExitCondition(ticker, price, indicator)) {
-                balance[ticker] *= price / entryPoint[ticker].price;
-
-                console.log(`Exit point ${ticker} ${price}`);
-                console.log(`Balance ${ticker} ${balance[ticker]}`);
+                console.log(`Exit point ${ticker} ${entryPoint[ticker].price} -> ${price}`);
+                console.log(`Profit ${Math.round((1 - (price / entryPoint[ticker].price )) * 1000000) / 10000}%`);
 
                 entryPoint[ticker].price = 0;
                 entryPoint[ticker].date = null;

@@ -43,12 +43,12 @@ let testExitCondition = (ticker: string, price: number, indicator: number) => {
 };
 
 export class Basic implements StrategyExecution {
-    async run(v: { new: { value: Value } }): void {
-        let obj = v.new.value;
-        let price = obj.price_in_dollar;
+    async run(v: { new: Value }): void {
+        let obj = v.new;
+        let price = obj.price;
         let date = new Date(obj.time);
         let ticker = obj.ticker;
-        let indicator = obj.indicator;
+        let indicator = obj.obv;
 
         previousDayPrice[ticker] = price;
 

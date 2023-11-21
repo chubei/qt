@@ -24,8 +24,17 @@ lambdas:
     endpoint: indicators
     module: ./common/strategies_runner.ts
 
-sql:
-    SELECT obv(value) as value INTO indicators FROM price;
+sql: |
+  SELECT 
+    JSON_VALUE(value, '$.time') AS time,
+    JSON_VALUE(value, '$.ticker') AS ticker,
+    JSON_VALUE(value, '$.price_in_dollar') AS price,
+    obv(value) as obv 
+  INTO indicators 
+  FROM price;
+
+
+
 
 udfs:
   - name: obv

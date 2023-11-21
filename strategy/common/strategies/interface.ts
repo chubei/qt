@@ -1,10 +1,10 @@
 export interface Value {
     ticker: string,
-    price_in_dollar: number,
+    price: number,
     time: number,
-    indicator: number
+    obv: number,
 }
 
 export interface StrategyExecution {
-    run(v: { new: { value: Value } }): void;
+    run(v: { new: Value }): void;
 }

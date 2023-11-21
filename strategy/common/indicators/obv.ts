@@ -10,6 +10,7 @@ interface Value {
     time: number,
     asset_type: string
 }
+
 const run = async (obj: Value) => {
     let price = parseFloat(obj.price_in_dollar);
     let volume = parseFloat(obj.volume);
@@ -27,12 +28,7 @@ const run = async (obj: Value) => {
 
     previousDayPrice[ticker] = price;
 
-    return {
-        indicator: obv[ticker],
-        price_in_dollar: price,
-        time: obj.time,
-        ticker: ticker
-    }
+    return obv[ticker];
 }
 
 export default run;

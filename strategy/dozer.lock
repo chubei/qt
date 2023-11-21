@@ -89,7 +89,25 @@
           "schema": {
             "fields": [
               {
-                "name": "value",
+                "name": "time",
+                "typ": "Json",
+                "nullable": false,
+                "source": "Dynamic"
+              },
+              {
+                "name": "ticker",
+                "typ": "Json",
+                "nullable": false,
+                "source": "Dynamic"
+              },
+              {
+                "name": "price",
+                "typ": "Json",
+                "nullable": false,
+                "source": "Dynamic"
+              },
+              {
+                "name": "obv",
                 "typ": "Json",
                 "nullable": false,
                 "source": "Dynamic"
@@ -155,7 +173,25 @@
       "schema": {
         "fields": [
           {
-            "name": "value",
+            "name": "time",
+            "typ": "Json",
+            "nullable": false,
+            "source": "Dynamic"
+          },
+          {
+            "name": "ticker",
+            "typ": "Json",
+            "nullable": false,
+            "source": "Dynamic"
+          },
+          {
+            "name": "price",
+            "typ": "Json",
+            "nullable": false,
+            "source": "Dynamic"
+          },
+          {
+            "name": "obv",
             "typ": "Json",
             "nullable": false,
             "source": "Dynamic"

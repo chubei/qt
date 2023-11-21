@@ -20,6 +20,15 @@ To test the trading application with mock data:
 deno run --allow-all ingest_mock_data.ts
 ```
 
+## Strategy dozer
+
+This is a strategy dozer that runs a strategy on the trading dozer.
+
+```bash
+cd ./strategy/common
+dozer run
+```
+
 ## Schema
 
 ```dbml

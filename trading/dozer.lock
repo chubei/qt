@@ -5,7 +5,47 @@
       {
         "handle": {
           "ns": 1,
+          "id": "from--2"
+        },
+        "kind": {
+          "Processor": {
+            "typ": "Table"
+          }
+        }
+      },
+      {
+        "handle": {
+          "ns": 1,
+          "id": "JS_trade_3"
+        },
+        "kind": {
+          "Processor": {
+            "typ": "JavaScript"
+          }
+        }
+      },
+      {
+        "handle": {
+          "ns": 1,
+          "id": "agg--4"
+        },
+        "kind": {
+          "Processor": {
+            "typ": "Projection"
+          }
+        }
+      },
+      {
+        "handle": {
+          "ns": 1,
           "id": "actions"
+        },
+        "kind": "Sink"
+      },
+      {
+        "handle": {
+          "ns": 1,
+          "id": "net_worth"
         },
         "kind": "Sink"
       },
@@ -30,6 +70,167 @@
       [
         1,
         0,
+        {
+          "from_port": 65535,
+          "to_port": 65535,
+          "schema": {
+            "fields": [
+              {
+                "name": "time",
+                "typ": "Timestamp",
+                "nullable": false,
+                "source": "Dynamic"
+              },
+              {
+                "name": "cash_in_dollar",
+                "typ": "Float",
+                "nullable": false,
+                "source": "Dynamic"
+              },
+              {
+                "name": "asset_value_in_dollar",
+                "typ": "Float",
+                "nullable": false,
+                "source": "Dynamic"
+              }
+            ],
+            "primary_index": []
+          }
+        }
+      ],
+      [
+        0,
+        2,
+        {
+          "from_port": 65535,
+          "to_port": 65535,
+          "schema": {
+            "fields": [
+              {
+                "name": "time",
+                "typ": "Timestamp",
+                "nullable": false,
+                "source": "Dynamic"
+              },
+              {
+                "name": "cash_in_dollar",
+                "typ": "Float",
+                "nullable": false,
+                "source": "Dynamic"
+              },
+              {
+                "name": "asset_value_in_dollar",
+                "typ": "Float",
+                "nullable": false,
+                "source": "Dynamic"
+              }
+            ],
+            "primary_index": []
+          }
+        }
+      ],
+      [
+        2,
+        4,
+        {
+          "from_port": 65535,
+          "to_port": 65535,
+          "schema": {
+            "fields": [
+              {
+                "name": "time",
+                "typ": "Timestamp",
+                "nullable": false,
+                "source": "Dynamic"
+              },
+              {
+                "name": "cash_in_dollar",
+                "typ": "Float",
+                "nullable": false,
+                "source": "Dynamic"
+              },
+              {
+                "name": "asset_value_in_dollar",
+                "typ": "Float",
+                "nullable": false,
+                "source": "Dynamic"
+              }
+            ],
+            "primary_index": []
+          }
+        }
+      ],
+      [
+        5,
+        1,
+        {
+          "from_port": 1000,
+          "to_port": 65535,
+          "schema": {
+            "fields": [
+              {
+                "name": "action",
+                "typ": "String",
+                "nullable": true,
+                "source": {
+                  "Table": {
+                    "connection": "actions",
+                    "name": "actions"
+                  }
+                }
+              },
+              {
+                "name": "amount_in_dollar",
+                "typ": "Float",
+                "nullable": true,
+                "source": {
+                  "Table": {
+                    "connection": "actions",
+                    "name": "actions"
+                  }
+                }
+              },
+              {
+                "name": "ticker",
+                "typ": "String",
+                "nullable": true,
+                "source": {
+                  "Table": {
+                    "connection": "actions",
+                    "name": "actions"
+                  }
+                }
+              },
+              {
+                "name": "time",
+                "typ": "Timestamp",
+                "nullable": false,
+                "source": {
+                  "Table": {
+                    "connection": "actions",
+                    "name": "actions"
+                  }
+                }
+              },
+              {
+                "name": "price_in_dollar",
+                "typ": "Float",
+                "nullable": true,
+                "source": {
+                  "Table": {
+                    "connection": "actions",
+                    "name": "actions"
+                  }
+                }
+              }
+            ],
+            "primary_index": []
+          }
+        }
+      ],
+      [
+        5,
+        3,
         {
           "from_port": 1000,
           "to_port": 65535,
@@ -190,6 +391,54 @@
         {
           "SortedInverted": [
             4
+          ]
+        }
+      ],
+      "enable_token": false,
+      "enable_on_event": true,
+      "connections": [
+        "actions"
+      ]
+    },
+    "net_worth": {
+      "path": "/net_worth",
+      "schema": {
+        "fields": [
+          {
+            "name": "time",
+            "typ": "Timestamp",
+            "nullable": false,
+            "source": "Dynamic"
+          },
+          {
+            "name": "cash_in_dollar",
+            "typ": "Float",
+            "nullable": false,
+            "source": "Dynamic"
+          },
+          {
+            "name": "asset_value_in_dollar",
+            "typ": "Float",
+            "nullable": false,
+            "source": "Dynamic"
+          }
+        ],
+        "primary_index": []
+      },
+      "secondary_indexes": [
+        {
+          "SortedInverted": [
+            0
+          ]
+        },
+        {
+          "SortedInverted": [
+            1
+          ]
+        },
+        {
+          "SortedInverted": [
+            2
           ]
         }
       ],

@@ -21,7 +21,28 @@ connections:
     adapter: default
     schemas: !Path actions.json
 
+operators:
+- name: trade
+  config: !JavaScript
+    schema:
+      fields:
+      - name: time
+        typ: Timestamp
+        nullable: false
+      - name: cash_in_dollar
+        typ: Float
+        nullable: false
+      - name: asset_value_in_dollar
+        typ: Float
+        nullable: false
+    module: ./trade.ts
+
+sql: SELECT * INTO net_worth from trade(actions);
+
 endpoints:
 - name: actions
   path: /actions
   table_name: actions
+- name: net_worth
+  path: /net_worth
+  table_name: net_worth

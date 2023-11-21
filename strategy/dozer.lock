@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "pipeline": {
+    "nodes": [
+      {
+        "handle": {
+          "ns": 1,
+          "id": "prices"
+        },
+        "kind": "Sink"
+      },
+      {
+        "handle": {
+          "ns": null,
+          "id": "prices"
+        },
+        "kind": {
+          "Source": {
+            "typ": "localstorage",
+            "port_names": {
+              "1000": "prices"
+            }
+          }
+        }
+      }
+    ],
+    "node_holes": [],
+    "edge_property": "directed",
+    "edges": [
+      [
+        1,
+        0,
+        {
+          "from_port": 1000,
+          "to_port": 65535,
+          "schema": {
+            "fields": [
+              {
+                "name": "Date",
+                "typ": "Date",
+                "nullable": true,
+                "source": {
+                  "Table": {
+                    "connection": "prices",
+                    "name": "prices"
+                  }
+                }
+              },
+              {
+                "name": "Open",
+                "typ": "Float",
+                "nullable": true,
+                "source": {
+                  "Table": {
+                    "connection": "prices",
+                    "name": "prices"
+                  }
+                }
+              },
+              {
+                "name": "High",
+                "typ": "Float",
+                "nullable": true,
+                "source": {
+                  "Table": {
+                    "connection": "prices",
+                    "name": "prices"
+                  }
+                }
+              },
+              {
+                "name": "Low",
+                "typ": "Float",
+                "nullable": true,
+                "source": {
+                  "Table": {
+                    "connection": "prices",
+                    "name": "prices"
+                  }
+                }
+              },
+              {
+                "name": "Close",
+                "typ": "Float",
+                "nullable": true,
+                "source": {
+                  "Table": {
+                    "connection": "prices",
+                    "name": "prices"
+                  }
+                }
+              },
+              {
+                "name": "Adj Close",
+                "typ": "Float",
+                "nullable": true,
+                "source": {
+                  "Table": {
+                    "connection": "prices",
+                    "name": "prices"
+                  }
+                }
+              },
+              {
+                "name": "Volume",
+                "typ": "Int",
+                "nullable": true,
+                "source": {
+                  "Table": {
+                    "connection": "prices",
+                    "name": "prices"
+                  }
+                }
+              }
+            ],
+            "primary_index": []
+          }
+        }
+      ]
+    ]
+  },
+  "endpoints": {
+    "prices": {
+      "path": "/prices",
+      "schema": {
+        "fields": [
+          {
+            "name": "Date",
+            "typ": "Date",
+            "nullable": true,
+            "source": {
+              "Table": {
+                "connection": "prices",
+                "name": "prices"
+              }
+            }
+          },
+          {
+            "name": "Open",
+            "typ": "Float",
+            "nullable": true,
+            "source": {
+              "Table": {
+                "connection": "prices",
+                "name": "prices"
+              }
+            }
+          },
+          {
+            "name": "High",
+            "typ": "Float",
+            "nullable": true,
+            "source": {
+              "Table": {
+                "connection": "prices",
+                "name": "prices"
+              }
+            }
+          },
+          {
+            "name": "Low",
+            "typ": "Float",
+            "nullable": true,
+            "source": {
+              "Table": {
+                "connection": "prices",
+                "name": "prices"
+              }
+            }
+          },
+          {
+            "name": "Close",
+            "typ": "Float",
+            "nullable": true,
+            "source": {
+              "Table": {
+                "connection": "prices",
+                "name": "prices"
+              }
+            }
+          },
+          {
+            "name": "Adj Close",
+            "typ": "Float",
+            "nullable": true,
+            "source": {
+              "Table": {
+                "connection": "prices",
+                "name": "prices"
+              }
+            }
+          },
+          {
+            "name": "Volume",
+            "typ": "Int",
+            "nullable": true,
+            "source": {
+              "Table": {
+                "connection": "prices",
+                "name": "prices"
+              }
+            }
+          }
+        ],
+        "primary_index": []
+      },
+      "secondary_indexes": [
+        {
+          "SortedInverted": [
+            0
+          ]
+        },
+        {
+          "SortedInverted": [
+            1
+          ]
+        },
+        {
+          "SortedInverted": [
+            2
+          ]
+        },
+        {
+          "SortedInverted": [
+            3
+          ]
+        },
+        {
+          "SortedInverted": [
+            4
+          ]
+        },
+        {
+          "SortedInverted": [
+            5
+          ]
+        },
+        {
+          "SortedInverted": [
+            6
+          ]
+        }
+      ],
+      "enable_token": false,
+      "enable_on_event": true,
+      "connections": [
+        "prices"
+      ]
+    }
+  }
+}

@@ -1,1 +1,3 @@
 /trading/.dozer
+/strategy/.dozer
+/strategy/deno_cache

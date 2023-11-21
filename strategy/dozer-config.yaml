@@ -15,7 +15,19 @@ endpoints:
     table_name: price
     path: /price
 
+  - name: indicators
+    table_name: indicators
+    path: /indicators
+
 lambdas:
   - !JavaScript
-    endpoint: price
-    module: ./strategies/obv.ts
+    endpoint: indicators
+    module: ./strategies_runner.ts
+
+sql:
+    SELECT obv(value) as value INTO indicators FROM price;
+
+udfs:
+  - name: obv
+    config: !JavaScript
+      module: ./indicators/obv.ts

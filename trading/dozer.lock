@@ -392,6 +392,12 @@
           "SortedInverted": [
             4
           ]
+        },
+        {
+          "SortedInverted": [
+            0,
+            2
+          ]
         }
       ],
       "enable_token": false,

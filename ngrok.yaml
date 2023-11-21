@@ -1,0 +1,9 @@
+version: 2
+authtoken: 2YUF6SAVGJMJQrAP2X966DgwwiZ_26P7NciWkm8xuKgSNQH6a
+tunnels:
+  first:
+    proto: http
+    addr: 8080
+  second:
+    proto: http
+    addr: 9080

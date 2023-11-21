@@ -43,6 +43,14 @@ endpoints:
 - name: actions
   path: /actions
   table_name: actions
+  index:
+    secondary:
+      create:
+        - !SortedInverted
+          fields:
+            - action
+            - ticker
+
 - name: net_worth
   path: /net_worth
   table_name: net_worth

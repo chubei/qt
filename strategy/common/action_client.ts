@@ -7,26 +7,29 @@ import { IngestService, Timestamp, Value } from "./ingest.d.ts";
 const schemaName = "actions";
 
 export class ActionClient {
-  private readonly writer: FileWriter | GrpcWriter;
   private seqNo: number = 0;
 
-  static async newGrpc(port: number): Promise<ActionClient> {
-    return new ActionClient(await GrpcWriter.new(port));
+  static async newGrpc(strategy: string, port: number): Promise<ActionClient> {
+    return new ActionClient(strategy, await GrpcWriter.new(port));
   }
 
   static async newFile(path: string): Promise<ActionClient> {
-    return new ActionClient(await FileWriter.new(path))
+    return new ActionClient(path, await FileWriter.new(path));
   }
 
-  private constructor(writer: FileWriter | GrpcWriter) {
-    this.writer = writer;
-  }
+  private constructor(
+    readonly strategy: string,
+    readonly writer: FileWriter | GrpcWriter,
+  ) {}
 
   /**
    * Deposits money into the account.
    */
   async deposit(time: Date, amountInDollar: number) {
     await this.insert([
+      {
+        stringValue: this.strategy,
+      },
       {
         stringValue: "Deposit",
       },
@@ -46,6 +49,9 @@ export class ActionClient {
    */
   async buy(time: Date, ticker: string, priceInDollar: number) {
     await this.insert([
+      {
+        stringValue: this.strategy,
+      },
       {
         stringValue: "Buy",
       },
@@ -68,6 +74,9 @@ export class ActionClient {
   async sell(time: Date, ticker: string, priceInDollar: number) {
     await this.insert([
       {
+        stringValue: this.strategy,
+      },
+      {
         stringValue: "Sell",
       },
       {},
@@ -88,6 +97,9 @@ export class ActionClient {
    */
   async skip(time: Date, ticker: string, priceInDollar: number) {
     await this.insert([
+      {
+        stringValue: this.strategy,
+      },
       {},
       {},
       {
@@ -102,8 +114,8 @@ export class ActionClient {
     ]);
   }
 
-  async close() {
-    await this.writer.close();
+  close() {
+    this.writer.close();
   }
 
   private async insert(values: Value[]) {
@@ -126,6 +138,10 @@ function dateToTimestamp(date: Date): Timestamp {
     seconds,
     nanos,
   };
+}
+
+export function timestampToDate(timestamp: Timestamp): Date {
+  return new Date(timestamp.seconds! * 1000 + timestamp.nanos! / 1000000);
 }
 
 export class GrpcWriter {
@@ -153,7 +169,7 @@ export class GrpcWriter {
   }
 
   close() {
-    this.client.close()
+    this.client.close();
   }
 }
 
@@ -173,6 +189,6 @@ class FileWriter {
   }
 
   close() {
-    this.file.close()
+    this.file.close();
   }
 }

@@ -26,6 +26,9 @@ operators:
   config: !JavaScript
     schema:
       fields:
+      - name: strategy
+        typ: String
+        nullable: false
       - name: time
         typ: Timestamp
         nullable: false

@@ -7,7 +7,7 @@ First start trading dozer and deposit some fund.
 ```bash
 cd trading
 dozer run
-deno run --allow-all deposit.ts
+deno run --allow-all deposit.ts ${strategy1} ${strategy2}
 ```
 
 Now run the strategy.
@@ -26,8 +26,10 @@ Because Dozer crashes if lambda starts async tasks, currently we're using `Actio
 After the strategy finishes, run the following command to ingest:
 
 ```bash
-deno run --allow-all trading/mock/ingest_from_file.ts ${path_to_jsonl}
+deno run --allow-all trading/mock/ingest_from_file.ts ${strategy1_output} ${strategy2_output} ...
 ```
+
+`ingest_from_file` adds Deposit action at the beginning automatically, so don't have to run `deposit.ts`.
 
 ## Trading Dozer
 
@@ -62,6 +64,7 @@ Table price {
 // - Sell: `ticker` and `price_in_dollar` are not null. Sell all the given asset at given price. Account asset value becomes 0.
 // - null: `ticker` and `price_in_dollar` are not null. If account is holding given asset, its asset value can change based on the price.
 Table actions {
+  strategy string // The strategy this action belongs to. Every strategy has its own account.
   action string // Deposit, Buy, Sell, nullable
   amount_in_dollar float // nullable
   ticker string // nullable
@@ -70,6 +73,7 @@ Table actions {
 }
 
 Table net_worth {
+  strategy string
   time timestamp
   cash_in_dollar float
   asset_value_in_dollar float

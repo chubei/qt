@@ -1,6 +1,6 @@
 import { ActionClient } from "../../strategy/common/action_client.ts";
 
-const client = await ActionClient.newGrpc(12345);
+const client = await ActionClient.newGrpc("mock", 12345);
 await client.deposit(new Date(), 100);
 await client.buy(new Date(), "AAPL", 100);
 await client.skip(new Date(), "AAPL", 300);

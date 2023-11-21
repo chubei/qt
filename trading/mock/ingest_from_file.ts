@@ -1,13 +1,29 @@
-import { GrpcWriter } from "../../strategy/common/action_client.ts";
+import { ActionClient, timestampToDate } from "../../strategy/common/action_client.ts";
 import { readline } from "https://deno.land/x/readline@v1.1.0/mod.ts";
 
-const file = await Deno.open(Deno.args[0]);
-const writer = await GrpcWriter.new(12345);
-for await (const lineBytes of readline(file)) {
+async function ingestFromFile(path: string) {
+  const file = await Deno.open(path);
+
+  let client: ActionClient | null = null;
+
+  for await (const lineBytes of readline(file)) {
     const line = new TextDecoder().decode(lineBytes);
     if (line.length === 0) {
-        break;
+      break;
     }
-    await writer.write(JSON.parse(line));
+
+    const data = JSON.parse(line);
+    if (client === null) {
+      client = await ActionClient.newGrpc(data.new[0].stringValue, 12345);
+      client.deposit(timestampToDate(data.new[4].timestampValue), 100_000);
+    }
+
+    await client.writer.write(data);
+  }
+
+  client?.close();
 }
-writer.close();
+
+for (const path of Deno.args) {
+  await ingestFromFile(path);
+}

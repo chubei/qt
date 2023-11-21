@@ -5,20 +5,20 @@
       {
         "handle": {
           "ns": 1,
-          "id": "prices"
+          "id": "price"
         },
         "kind": "Sink"
       },
       {
         "handle": {
           "ns": null,
-          "id": "prices"
+          "id": "price_connection"
         },
         "kind": {
           "Source": {
-            "typ": "localstorage",
+            "typ": "javascript",
             "port_names": {
-              "1000": "prices"
+              "1000": "json_records"
             }
           }
         }
@@ -36,79 +36,13 @@
           "schema": {
             "fields": [
               {
-                "name": "Date",
-                "typ": "Date",
-                "nullable": true,
+                "name": "value",
+                "typ": "Json",
+                "nullable": false,
                 "source": {
                   "Table": {
-                    "connection": "prices",
-                    "name": "prices"
-                  }
-                }
-              },
-              {
-                "name": "Open",
-                "typ": "Float",
-                "nullable": true,
-                "source": {
-                  "Table": {
-                    "connection": "prices",
-                    "name": "prices"
-                  }
-                }
-              },
-              {
-                "name": "High",
-                "typ": "Float",
-                "nullable": true,
-                "source": {
-                  "Table": {
-                    "connection": "prices",
-                    "name": "prices"
-                  }
-                }
-              },
-              {
-                "name": "Low",
-                "typ": "Float",
-                "nullable": true,
-                "source": {
-                  "Table": {
-                    "connection": "prices",
-                    "name": "prices"
-                  }
-                }
-              },
-              {
-                "name": "Close",
-                "typ": "Float",
-                "nullable": true,
-                "source": {
-                  "Table": {
-                    "connection": "prices",
-                    "name": "prices"
-                  }
-                }
-              },
-              {
-                "name": "Adj Close",
-                "typ": "Float",
-                "nullable": true,
-                "source": {
-                  "Table": {
-                    "connection": "prices",
-                    "name": "prices"
-                  }
-                }
-              },
-              {
-                "name": "Volume",
-                "typ": "Int",
-                "nullable": true,
-                "source": {
-                  "Table": {
-                    "connection": "prices",
-                    "name": "prices"
+                    "connection": "price_connection",
+                    "name": "json_records"
                   }
                 }
               }
@@ -120,131 +54,29 @@
     ]
   },
   "endpoints": {
-    "prices": {
-      "path": "/prices",
+    "price": {
+      "path": "/price",
       "schema": {
         "fields": [
           {
-            "name": "Date",
-            "typ": "Date",
-            "nullable": true,
+            "name": "value",
+            "typ": "Json",
+            "nullable": false,
             "source": {
               "Table": {
-                "connection": "prices",
-                "name": "prices"
-              }
-            }
-          },
-          {
-            "name": "Open",
-            "typ": "Float",
-            "nullable": true,
-            "source": {
-              "Table": {
-                "connection": "prices",
-                "name": "prices"
-              }
-            }
-          },
-          {
-            "name": "High",
-            "typ": "Float",
-            "nullable": true,
-            "source": {
-              "Table": {
-                "connection": "prices",
-                "name": "prices"
-              }
-            }
-          },
-          {
-            "name": "Low",
-            "typ": "Float",
-            "nullable": true,
-            "source": {
-              "Table": {
-                "connection": "prices",
-                "name": "prices"
-              }
-            }
-          },
-          {
-            "name": "Close",
-            "typ": "Float",
-            "nullable": true,
-            "source": {
-              "Table": {
-                "connection": "prices",
-                "name": "prices"
-              }
-            }
-          },
-          {
-            "name": "Adj Close",
-            "typ": "Float",
-            "nullable": true,
-            "source": {
-              "Table": {
-                "connection": "prices",
-                "name": "prices"
-              }
-            }
-          },
-          {
-            "name": "Volume",
-            "typ": "Int",
-            "nullable": true,
-            "source": {
-              "Table": {
-                "connection": "prices",
-                "name": "prices"
+                "connection": "price_connection",
+                "name": "json_records"
               }
             }
           }
         ],
         "primary_index": []
       },
-      "secondary_indexes": [
-        {
-          "SortedInverted": [
-            0
-          ]
-        },
-        {
-          "SortedInverted": [
-            1
-          ]
-        },
-        {
-          "SortedInverted": [
-            2
-          ]
-        },
-        {
-          "SortedInverted": [
-            3
-          ]
-        },
-        {
-          "SortedInverted": [
-            4
-          ]
-        },
-        {
-          "SortedInverted": [
-            5
-          ]
-        },
-        {
-          "SortedInverted": [
-            6
-          ]
-        }
-      ],
+      "secondary_indexes": [],
       "enable_token": false,
       "enable_on_event": true,
       "connections": [
-        "prices"
+        "price_connection"
       ]
     }
   }

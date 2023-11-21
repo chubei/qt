@@ -2,7 +2,22 @@
 
 ## Strategy Dozer
 
-TODO
+First start trading dozer and deposit some fund.
+
+```bash
+cd trading
+dozer run
+deno run --allow-all deposit.ts
+```
+
+Now run the strategy.
+
+```bash
+cd strategy
+dozer run
+```
+
+You can check the net worth change in `http://localhost:9080/net_worth`.
 
 ## Trading Dozer
 

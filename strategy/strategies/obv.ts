@@ -1,5 +1,5 @@
-import {ActionClient} from "./action_client.ts";
-import {} from "./init_lambda.ts";
+import {ActionClient} from "../common/action_client.ts";
+import {} from "../common/init_lambda.ts";
 
 let client: ActionClient = await ActionClient.new(12345);
 

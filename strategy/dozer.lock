@@ -111,6 +111,12 @@
                 "typ": "Json",
                 "nullable": false,
                 "source": "Dynamic"
+              },
+              {
+                "name": "ma12",
+                "typ": "Json",
+                "nullable": false,
+                "source": "Dynamic"
               }
             ],
             "primary_index": []
@@ -195,11 +201,23 @@
             "typ": "Json",
             "nullable": false,
             "source": "Dynamic"
+          },
+          {
+            "name": "ma12",
+            "typ": "Json",
+            "nullable": false,
+            "source": "Dynamic"
           }
         ],
         "primary_index": []
       },
-      "secondary_indexes": [],
+      "secondary_indexes": [
+        {
+          "SortedInverted": [
+            1
+          ]
+        }
+      ],
       "enable_token": false,
       "enable_on_event": true,
       "connections": [

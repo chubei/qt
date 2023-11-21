@@ -1,5 +1,5 @@
 
-const mode = Deno.env.get("MODE");
+const mode = Deno.env.get("MODE") ?? "history";
 async function fetchDataAndIngest() {
 
     if (mode === "realtime") {

@@ -29,6 +29,12 @@ lambdas:
   - !JavaScript
     endpoint: indicators
     module: ./strategies/obv.ts
+  - !JavaScript
+    endpoint: indicators
+    module: ./strategies/ma_cross.ts
+  - !JavaScript
+    endpoint: indicators
+    module: ./strategies/rsi.ts
 
 sql: |
   SELECT 
@@ -36,7 +42,10 @@ sql: |
     JSON_VALUE(value, '$.ticker') AS ticker,
     JSON_VALUE(value, '$.price_in_dollar') AS price,
     obv(value) as obv,
-    ma12(value) as ma12
+    ma5(value) as ma5,
+    ma12(value) as ma12,
+    ma22(value) as ma22,
+    rsi(value) as rsi
   INTO indicators 
   FROM price;
 
@@ -44,6 +53,15 @@ udfs:
   - name: obv
     config: !JavaScript
       module: ./indicators/obv.ts
+  - name: ma5
+    config: !JavaScript
+      module: ./indicators/ma5.ts
   - name: ma12
     config: !JavaScript
       module: ./indicators/ma12.ts
+  - name: ma22
+    config: !JavaScript
+      module: ./indicators/ma22.ts
+  - name: rsi
+    config: !JavaScript
+      module: ./indicators/rsi.ts

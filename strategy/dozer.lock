@@ -113,7 +113,25 @@
                 "source": "Dynamic"
               },
               {
+                "name": "ma5",
+                "typ": "Json",
+                "nullable": false,
+                "source": "Dynamic"
+              },
+              {
                 "name": "ma12",
+                "typ": "Json",
+                "nullable": false,
+                "source": "Dynamic"
+              },
+              {
+                "name": "ma22",
+                "typ": "Json",
+                "nullable": false,
+                "source": "Dynamic"
+              },
+              {
+                "name": "rsi",
                 "typ": "Json",
                 "nullable": false,
                 "source": "Dynamic"
@@ -203,7 +221,25 @@
             "source": "Dynamic"
           },
           {
+            "name": "ma5",
+            "typ": "Json",
+            "nullable": false,
+            "source": "Dynamic"
+          },
+          {
             "name": "ma12",
+            "typ": "Json",
+            "nullable": false,
+            "source": "Dynamic"
+          },
+          {
+            "name": "ma22",
+            "typ": "Json",
+            "nullable": false,
+            "source": "Dynamic"
+          },
+          {
+            "name": "rsi",
             "typ": "Json",
             "nullable": false,
             "source": "Dynamic"

@@ -1,6 +1,6 @@
 import { Value } from "../common/interface";
 
-class Ma {
+export class Ma {
   history: number[] = [];
 
   constructor(readonly windowSize: number) {}

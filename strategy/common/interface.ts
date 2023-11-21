@@ -10,10 +10,20 @@ export interface Indicator {
   ticker: string;
   price: number;
   time: number;
-  obv: number;
-  ma12: number;
+  obv: number | null;
+  ma5: number | null;
+  ma12: number | null;
+  ma22: number | null;
+  rsi: number | null;
 }
 
-export interface StrategyExecution {
-  run(v: { new: Indicator }): void;
+export function shouldConsiderTicker(
+  ticker: string,
+  tickerFilter: [string] | null,
+) {
+  if (tickerFilter === null) {
+    return true;
+  }
+
+  return tickerFilter.includes(ticker);
 }

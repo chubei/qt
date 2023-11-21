@@ -1,7 +1,7 @@
-import { Indicator, StrategyExecution } from "../common/interface.ts";
+import { Indicator, shouldConsiderTicker } from "../common/interface.ts";
 import { ActionClient } from "../common/action_client.ts";
 
-const client: ActionClient = await ActionClient.newFile("obv");
+const client = await ActionClient.newFile("obv");
 
 /*
  Enter position when one of conditions is met:
@@ -26,17 +26,17 @@ function testEntryCondition(
   indicator: Indicator,
   tickerFilter: [string] | null,
 ): boolean {
-  if (tickerFilter !== null && tickerFilter.indexOf(indicator.ticker) === -1) {
+  if (!shouldConsiderTicker(indicator.ticker, tickerFilter)) {
     return false;
   }
-  return indicator.obv > 0;
+  return indicator.obv !== null && indicator.obv > 0;
 }
 
 function testExitCondition(
   holding: Holding,
   indicator: Indicator,
 ): boolean {
-  if (indicator.obv < 0) {
+  if (indicator.obv !== null && indicator.obv < 0) {
     return true;
   }
 
@@ -57,6 +57,10 @@ class Obv {
   constructor(readonly tickerFilter: [string] | null) {}
 
   update(indicator: Indicator): "buy" | "sell" | "skip" {
+    if (indicator.obv === null) {
+      return "skip";
+    }
+
     if (this.holding === null) {
       if (testEntryCondition(indicator, this.tickerFilter)) {
         this.holding = {

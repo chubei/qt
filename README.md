@@ -34,6 +34,18 @@ deno run --allow-all trading/mock/ingest_from_file.ts ${strategy1_output} ${stra
 `ingest_from_file` adds Deposit action at the beginning automatically, so don't
 have to run `deposit.ts`.
 
+## Visualization
+
+First expose the two applications to the internet.
+
+```bash
+ngrok start --all --config ngrok.yml
+```
+
+Goto <https://monitor.dev.getdozer.io/connections/datasources> and update the STRATEGY and TRADING data source URL.
+
+Goto <https://monitor.dev.getdozer.io/d/e488d6ec-c85d-43ed-ba1b-6cd4c99f5668/hackathon?orgId=1&from=1668445642777&to=1700693704327> to see the dashboard.
+
 ## Trading Dozer
 
 Go to `./trading`.

@@ -40,7 +40,7 @@ operators:
         nullable: false
     module: ./trade.ts
 
-sql: SELECT * INTO net_worth from trade(actions);
+sql: SELECT strategy, time, (cash_in_dollar + asset_value_in_dollar) AS net_worth INTO net_worth from trade(actions);
 
 endpoints:
 - name: actions
@@ -51,8 +51,8 @@ endpoints:
       create:
         - !SortedInverted
           fields:
+            - strategy
             - action
-            - ticker
 
 - name: net_worth
   path: /net_worth

@@ -162,13 +162,7 @@
                 "source": "Dynamic"
               },
               {
-                "name": "cash_in_dollar",
-                "typ": "Float",
-                "nullable": false,
-                "source": "Dynamic"
-              },
-              {
-                "name": "asset_value_in_dollar",
+                "name": "net_worth",
                 "typ": "Float",
                 "nullable": false,
                 "source": "Dynamic"
@@ -454,8 +448,8 @@
         },
         {
           "SortedInverted": [
-            1,
-            3
+            0,
+            1
           ]
         }
       ],
@@ -482,13 +476,7 @@
             "source": "Dynamic"
           },
           {
-            "name": "cash_in_dollar",
-            "typ": "Float",
-            "nullable": false,
-            "source": "Dynamic"
-          },
-          {
-            "name": "asset_value_in_dollar",
+            "name": "net_worth",
             "typ": "Float",
             "nullable": false,
             "source": "Dynamic"
@@ -513,11 +501,6 @@
         {
           "SortedInverted": [
             2
-          ]
-        },
-        {
-          "SortedInverted": [
-            3
           ]
         }
       ],

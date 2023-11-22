@@ -20,8 +20,8 @@ async function fetchDataAndIngest() {
         old_val: null,
         new_val: {
           ticker: record.symbol,
-          price_in_dollar: record.priceUsd,
-          volume: record.volumeUsd24Hr,
+          price_in_dollar: parseFloat(record.priceUsd),
+          volume: parseFloat(record.volumeUsd24Hr),
           time: Date.now(),
           asset_type: "Crypto",
         },

@@ -15,6 +15,11 @@ async function fetchDataAndIngest() {
     await Deno[Deno.internal].core.ops.ingest(snapshot_msg);
 
     for (const record of data) {
+
+      const isoString = (new Date()).toISOString();
+      const datePart = isoString.split('T')[0];
+      const timePart = isoString.split('T')[1].split('.')[0];
+
       const msg = {
         typ: "Insert",
         old_val: null,
@@ -22,7 +27,7 @@ async function fetchDataAndIngest() {
           ticker: record.symbol,
           price_in_dollar: parseFloat(record.priceUsd),
           volume: parseFloat(record.volumeUsd24Hr),
-          time: Date.now(),
+          time: `${datePart}T${timePart}+0000`,
           asset_type: "Crypto",
         },
       };

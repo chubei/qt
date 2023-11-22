@@ -43,8 +43,13 @@ class Rsi {
   }
 }
 
-const rsi = new Rsi(14);
+const tickerToMsi = new Map<string, Rsi>();
 
 export default function (value: Value) {
+  let rsi = tickerToMsi.get(value.ticker);
+  if (!rsi) {
+    rsi = new Rsi(14);
+    tickerToMsi.set(value.ticker, rsi);
+  }
   return rsi.process(value.price_in_dollar);
 }

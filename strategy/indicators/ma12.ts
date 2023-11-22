@@ -20,8 +20,13 @@ export class Ma {
   }
 }
 
-const ma12 = new Ma(12);
+const tickerToMa12 = new Map<string, Ma>();
 
 export default function (value: Value) {
+  let ma12 = tickerToMa12.get(value.ticker);
+  if (!ma12) {
+    ma12 = new Ma(12);
+    tickerToMa12.set(value.ticker, ma12);
+  }
   return ma12.process(value.price_in_dollar);
 }

@@ -30,7 +30,7 @@ class MaCross {
 }
 
 const maCross = new MaCross(["AAPL"]);
-const client = await ActionClient.newFile("ma cross");
+const client = await ActionClient.newGrpc("ma cross", 12345);
 
 export default async function (operation: { new: Indicator }) {
   const indicator = operation.new;

@@ -30,7 +30,7 @@ class Rsi {
 }
 
 const rsi = new Rsi(["AAPL"]);
-const client = await ActionClient.newFile("rsi");
+const client = await ActionClient.newGrpc("rsi", 12345);
 
 export default async function (operation: { new: Indicator }) {
   const indicator = operation.new;

@@ -1,7 +1,7 @@
 import { Indicator, shouldConsiderTicker } from "../common/interface.ts";
 import { ActionClient } from "../common/action_client.ts";
 
-const client = await ActionClient.newFile("obv");
+const client = await ActionClient.newGrpc("obv", 12345);
 
 /*
  Enter position when one of conditions is met:
